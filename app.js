@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 /*  db connection */
-const connectDB = require('./connect');
-connectDB();
+// const connectDB = require('./db/connect');
+// connectDB();
 /* Routes */
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
