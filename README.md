@@ -10,4 +10,7 @@ This backend currently supports only basic operations.
 
 ### 🔹 Get Score
 ```http
+GET /getScore
+GET /getScore?Group=<group>
 GET /getScore?Group=<group>&Category=<category>
+```

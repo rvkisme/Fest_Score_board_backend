@@ -1,11 +1,14 @@
-var express = require('express');
-var router = express.Router();
-
+const express = require("express");
+const router = express.Router();
+const userHelpers = require("../helpers/userHelpers");
 /* GET home page. */
-router.get('/getScore', function(req, res, next) {
-  console.log(req.query);
-  
-  res.json({ message: `Group ` });
+router.get("/getScore", async function (req, res, next) {
+    try {
+        const scores = await userHelpers.getAllScores();
+        res.json(scores);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

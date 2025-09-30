@@ -1,8 +1,8 @@
 // connect.js
 const mongoose = require('mongoose');
 
-const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/festScoreBoard';
-
+// const uri = process.env.MONGO_URI;
+const uri = "mongodb+srv://rvkisme_db_user:MckujjoxCVXbyzFf@festscoreboard.rvu1dx7.mongodb.net/?retryWrites=true&w=majority&appName=FestScoreboard"
 const clientOptions = {
   serverApi: { version: '1', strict: true, deprecationErrors: true },
 };
