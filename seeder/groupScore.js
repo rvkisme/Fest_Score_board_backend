@@ -1,33 +1,33 @@
-const helper = require("../helpers/userHelpers");
-const connectDb = require("../db/connect");
+// seeder/seedGroupScores.js
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-async function addMultipleScores() {
+const connectDB = require("../db/connect");
+const GroupScore = require("../models/GroupScoreModel");
+
+const scores = [
+  { team: "QUBA",  score: 120 },
+  { team: "THAIBA",  score: 200 },
+  { team: "MINA",  score: 150 },
+];
+
+async function seedData() {
   try {
-    // 1️⃣ Connect to MongoDB first
-    await connectDb();
-    console.log("MongoDB connected ✅");
+    await connectDB();
 
-    // 2️⃣ Array of scores to insert
-    const scores = [
-      { team: "QUBA", category: "sub_junior", score: 10 },
-      { team: "THAIBA", category: "sub_junior", score: 15 },
-      { team: "MINA", category: "sub_junior", score: 20 },
-    ];
+    // Clear existing data if needed
+    await GroupScore.deleteMany({});
+    console.log("🧹 Cleared old scores");
 
-    // 3️⃣ Insert each score sequentially
-    for (let i = 0; i < scores.length; i++) {
-      const { team, category, score } = scores[i];
-      const result = await helper.addScore(team, category, score);
-      console.log(`Inserted:`, result);
-    }
+    // Insert new data
+    await GroupScore.insertMany(scores);
+    console.log("✅ Sample scores inserted");
 
-    console.log("All scores inserted ✅");
-    process.exit(0); // exit script when done
-  } catch (err) {
-    console.error("Error inserting scores:", err);
-    process.exit(1); // exit with error
+    process.exit(); // end the script
+  } catch (error) {
+    console.error("❌ Error seeding data:", error);
+    process.exit(1);
   }
 }
 
-// Run the function
-addMultipleScores();
+seedData();
